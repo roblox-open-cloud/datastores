@@ -73,7 +73,13 @@ export class OrderedDataStore {
         return this;
     }
 
-    public async create(id: string, value: number) {
+    /**
+     * Creates a new entry under this ordered datastore.
+     * @param id The id for the entry you want to create.
+     * @param value The value for the entry you want to create.
+     * @returns {Promise<OrderedDataStoreEntry>}
+     */
+    public async create(id: string, value: number): Promise<OrderedDataStoreEntry> {
         const url = new URL(this._url.pathname, BASE_API_URL);
         url.searchParams.set('id', id);
 
@@ -91,7 +97,12 @@ export class OrderedDataStore {
         return new OrderedDataStoreEntry(data, this);
     }
 
-    public async get(id: string) {
+    /**
+     * Get an entry from this ordered datastore.
+     * @param id The id for the entry you want to fetch.
+     * @returns {Promise<OrderedDataStoreEntry>}
+     */
+    public async get(id: string): Promise<OrderedDataStoreEntry> {
         const url = new URL(`${this._url.pathname}/${id}`, BASE_API_URL);
 
         const response = await request(url, {
@@ -105,7 +116,12 @@ export class OrderedDataStore {
         return new OrderedDataStoreEntry(data, this);
     }
 
-    public async delete(id: string) {
+    /**
+     * Delete an entry from this ordered datastore.
+     * @param id The id for the entry you want to delete.
+     * @returns {Promise<boolean>} Whether or not the deletion was successful.
+     */
+    public async delete(id: string): Promise<boolean> {
         const url = new URL(`${this._url.pathname}/${id}`, BASE_API_URL);
 
         const response = await request(url, {
@@ -121,7 +137,14 @@ export class OrderedDataStore {
         return true;
     }
 
-    public async update(id: string, value: number, allowMissing: boolean = false) {
+    /**
+     * 
+     * @param id The id for the entry you want to update.
+     * @param value The updated value for this entry.
+     * @param allowMissing Whether or not to automatically create a new entry if it's missing.
+     * @returns {Promise<OrderedDataStoreEntry>}
+     */
+    public async update(id: string, value: number, allowMissing: boolean = false): Promise<OrderedDataStoreEntry> {
         // Entries can only support up to Int64.
         if (value > BigInt(9223372036854775807n)) {
             throw new Error(`Number is bigger than Int64`);

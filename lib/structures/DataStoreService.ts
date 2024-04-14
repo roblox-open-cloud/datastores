@@ -15,7 +15,14 @@ export class DataStoreService {
         this._universeId = id;
     }
 
-    public getOrderedDataStore(name: string, params: OrderedDataStoreListParameters = {}, scope: string = 'global') {
+    /**
+     * Sets up an object for fetching from an ordered datastore.
+     * @param name The name of the ordered datastore.
+     * @param params The extra params for the request.
+     * @param scope The scope of the datastore.
+     * @returns {OrderedDataStore}
+     */
+    public getOrderedDataStore(name: string, params: OrderedDataStoreListParameters = {}, scope: string = 'global'): OrderedDataStore {
         const urlParams = new URLSearchParams();
         setParams(urlParams, params);
         

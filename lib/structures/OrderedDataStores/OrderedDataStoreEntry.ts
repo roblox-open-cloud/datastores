@@ -30,8 +30,13 @@ export class OrderedDataStoreEntry {
         return this._context.delete(this.id);
     }
 
-    /** Updates this specific entry. */
-    public async update(value: number, allowMissing: boolean = false) {
-        return this._context.update(this.id, value, allowMissing);
+    /**
+     * Update this specific entry.
+     * @param value The updated value for this entry.
+     * @param allowMissing Whether or not to automatically create a new entry if it's missing.
+     * @returns {Promise<OrderedDataStoreEntry>}
+     */
+    public async update(value: number): Promise<OrderedDataStoreEntry> {
+        return await this._context.update(this.id, value, false);
     }
 }
