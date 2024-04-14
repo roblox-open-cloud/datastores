@@ -1,11 +1,10 @@
 import type { ListEntriesResponse, ListEntriesResponseItem } from '@roblox-open-cloud/api-types/v1';
-import type { DataStoreService } from "#lib/DataStoreService";
+import type { DataStoreService } from "#lib/structures/DataStoreService";
 import type { OrderedDataStoreListParameters } from "#lib/types/parameters";
 import { OrderedDataStoreEntry } from "#lib/structures/OrderedDataStores/OrderedDataStoreEntry";
 import { setParams } from "#lib/util/setParams";
 import { request } from "#lib/util/request";
 import { BASE_API_URL } from "#lib/util/constants";
-import path from 'path';
 
 export class OrderedDataStore {
     /** The name of the ordered datastore. */
